@@ -6,6 +6,9 @@ import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
 
+/**
+ * websocket客户端 这里没啥功能 不用看 直接看WebSocketManager里面怎么用的就行
+ */
 public class JWebSocketClient extends WebSocketClient {
 
     public JWebSocketClient(URI serverUri) {

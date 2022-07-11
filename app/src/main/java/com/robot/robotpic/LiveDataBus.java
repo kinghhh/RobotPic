@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 全局的消息处理工具 livedata
+ */
 public class LiveDataBus {
     public static final String CHANNEL_RMSG = "receive_message ";
     public static final String CHANNEL_SMSG = "send_message ";
