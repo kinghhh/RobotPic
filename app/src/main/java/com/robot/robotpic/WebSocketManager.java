@@ -2,6 +2,8 @@ package com.robot.robotpic;
 
 import android.util.Log;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import org.java_websocket.framing.CloseFrame;
 
 import java.net.URI;
@@ -22,17 +24,22 @@ public class WebSocketManager {
     }
 
 
+    /**
+     * 建立websocket连接
+     * @param ip
+     */
     public void openSocket(String ip){
         if (socketClient != null) {
             socketClient.close();
         }
 
-        URI uri = URI.create("ws://");
+        URI uri = URI.create("ws://"+ip);
         socketClient = new JWebSocketClient(uri){
             @Override
             public void onMessage(String message) {
                 super.onMessage(message);
-                Log.i("HHH","message : "+message);
+                // websocket会在这里收到服务端发过来的消息
+                LogUtils.i("HHH","message : "+message);
                 LiveDataBus.getInstance().getChannel(LiveDataBus.CHANNEL_RMSG,String.class).postValue(message);
             }
         };

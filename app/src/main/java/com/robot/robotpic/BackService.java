@@ -52,7 +52,12 @@ public class BackService extends Service implements LifecycleOwner {
     public void onCreate() {
         super.onCreate();
         mHandler.sendEmptyMessageDelayed(CODE_OPEN_ACTIVITY,startActivityTime);
-        //
+
+        // Service的onCreate只会执行一次 所以在这里打开websocket 确保websocket只做一次连接
+        // websocket可能需要在线程里面启动 如果崩溃 可以在这里new Thread
+//        WebSocketManager.getInstance().openSocket("");
+
+        // 订阅LiveData消息 websocket收到消息之后 会通过LiveData发送出来
         LiveDataBus.getInstance().getChannel(LiveDataBus.CHANNEL_RMSG,String.class).observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
